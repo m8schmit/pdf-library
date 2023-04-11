@@ -1,0 +1,14 @@
+version: '3'
+services:
+  pdf-library:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: '${UID}:${GID}'
+    volumes:
+      - ./:/opt/app
+    ports:
+      - 4222:3000
+    command: bash -c 'yarn install && yarn build && yarn dev'
+    stdin_open: true
+    restart: unless-stopped
